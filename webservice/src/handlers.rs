@@ -7,24 +7,41 @@ pub async fn new_course(
     new_course: web::Json<Course>,
     app_state: web::Data<AppState>,
 ) -> HttpResponse {
-    println!("Received new course");
-    let course_count = app_state
-        .courses
-        .lock()
-        .unwrap()
-        .clone()
-        .into_iter()
-        .filter(|course| course.teacher_id == new_course.teacher_id)
-        .collect::<Vec<Course>>()
-        .len();
-    let new_course = Course {
-        teacher_id: new_course.teacher_id,
-        id: Some(course_count + 1),
-        name: new_course.name.clone(),
-        time: Some(Utc::now().naive_utc()),
-    };
-    app_state.courses.lock().unwrap().push(new_course);
-    HttpResponse::Ok().json("Course added")
+    // println!("Received new course");
+    // let course_count = app_state
+    //     .courses
+    //     .lock()
+    //     .unwrap()
+    //     .clone()
+    //     .into_iter()
+    //     .filter(|course| course.teacher_id == new_course.teacher_id)
+    //     .collect::<Vec<Course>>()
+    //     .len();
+    // let new_course = Course {
+    //     teacher_id: new_course.teacher_id,
+    //     id: Some(course_count + 1),
+    //     name: new_course.name.clone(),
+    //     time: Some(Utc::now().naive_utc()),
+    // };
+    // app_state.courses.lock().unwrap().push(new_course);
+    HttpResponse::Ok().json("Success")
+}
+
+pub async fn get_coures_for_teacher(
+    app_state: web::Data<AppState>,
+    params: web::Path<(usize)>,
+) -> HttpResponse {
+    // let teacher_id: usize = params.into_inner().0;
+
+    // let filtered_courses = app_state
+    HttpResponse::Ok().json("Success")
+}
+
+pub async fn get_course_detail(
+    app_state: web::Data<AppState>,
+    params: web::Path<(usize, usize)>,
+) -> HttpResponse {
+    HttpResponse::Ok().json("Success")
 }
 
 pub async fn health_check_handler(app_state: web::Data<AppState>) -> HttpResponse {
@@ -51,7 +68,7 @@ mod tests {
         });
         let app_state = web::Data::new(AppState {
             health_check_response: "".into(),
-            courses: Mutex::new(vec![]),
+            // courses: Mutex::new(vec![]),
             visit_count: Mutex::new(0),
         });
 
