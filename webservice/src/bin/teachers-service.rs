@@ -1,6 +1,6 @@
 use actix_web::{web, App, HttpServer};
 use dotenv::dotenv;
-use sql::postgres::PgPoolOptions;
+use sqlx::postgres::PgPoolOptions;
 use std::env;
 use std::io;
 use std::sync::Mutex;
@@ -21,10 +21,13 @@ use routers::*;
 use state::AppState;
 #[actix_rt::main]
 async fn main() -> io::Result<()> {
-    dotenv.ok();
+    dotenv().ok();
 
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL IS UNAVAILABLE");
-    let db_pool = PgPoolOptions::new().connect(&database_url).await.unwrap();
+    let db_pool = PgPoolOptions::new()
+        .connect(&database_url)
+        .await
+        .expect("can't connect to db");
 
     let shared_data = web::Data::new(AppState {
         health_check_response: "I am Ok".to_string(),
