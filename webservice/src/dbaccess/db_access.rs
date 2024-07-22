@@ -1,5 +1,5 @@
-use super::error::*;
-use super::models::*;
+use crate::error::*;
+use crate::models::course::Course;
 use chrono::NaiveDateTime;
 use sqlx::postgres::PgPool;
 

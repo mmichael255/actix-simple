@@ -5,7 +5,7 @@ use std::env;
 use std::io;
 use std::sync::Mutex;
 
-#[path = "../handlers.rs"]
+#[path = "../handlers/mod.rs"]
 mod handlers;
 
 #[path = "../routers.rs"]
@@ -14,11 +14,11 @@ mod routers;
 #[path = "../state.rs"]
 mod state;
 
-#[path = "../models.rs"]
+#[path = "../models/mod.rs"]
 mod models;
 
-#[path = "../db_access.rs"]
-mod db_access;
+#[path = "../dbaccess/mod.rs"]
+mod dbaccess;
 #[path = "../error.rs"]
 mod error;
 
