@@ -17,6 +17,11 @@ mod state;
 #[path = "../models.rs"]
 mod models;
 
+#[path = "../db_access.rs"]
+mod db_access;
+#[path = "../error.rs"]
+mod error;
+
 use routers::*;
 use state::AppState;
 #[actix_rt::main]
