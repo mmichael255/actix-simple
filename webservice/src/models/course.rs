@@ -14,7 +14,7 @@ pub struct Course {
     pub format: Option<String>,
     pub structure: Option<String>,
     pub duration: Option<String>,
-    pub price: Option<String>,
+    pub price: Option<i32>,
     pub language: Option<String>,
     pub level: Option<String>,
 }
@@ -27,19 +27,19 @@ pub struct CreateCourse {
     pub format: Option<String>,
     pub structure: Option<String>,
     pub duration: Option<String>,
-    pub price: Option<String>,
+    pub price: Option<i32>,
     pub language: Option<String>,
     pub level: Option<String>,
 }
 
 #[derive(Deserialize, Debug, Clone)]
 pub struct UpdateCourse {
-    pub name: String,
+    pub name: Option<String>,
     pub description: Option<String>,
     pub format: Option<String>,
     pub structure: Option<String>,
     pub duration: Option<String>,
-    pub price: Option<String>,
+    pub price: Option<i32>,
     pub language: Option<String>,
     pub level: Option<String>,
 }
@@ -59,9 +59,9 @@ pub struct UpdateCourse {
 //     }
 // }
 
-impl TryFrom<web::Json<Course>> for CreateCourse {
+impl TryFrom<web::Json<CreateCourse>> for CreateCourse {
     type Error = MyError;
-    fn try_from(course: web::Json<Course>) -> Result<Self, Self::Error> {
+    fn try_from(course: web::Json<CreateCourse>) -> Result<Self, Self::Error> {
         Ok(CreateCourse {
             teacher_id: course.teacher_id,
             name: course.name.clone(),
@@ -75,8 +75,8 @@ impl TryFrom<web::Json<Course>> for CreateCourse {
         })
     }
 }
-impl From<web::Json<Course>> for UpdateCourse {
-    fn from(course: web::Json<Course>) -> Self {
+impl From<web::Json<UpdateCourse>> for UpdateCourse {
+    fn from(course: web::Json<UpdateCourse>) -> Self {
         UpdateCourse {
             name: course.name.clone(),
             description: course.description.clone(),
