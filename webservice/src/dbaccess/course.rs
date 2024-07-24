@@ -1,6 +1,5 @@
 use crate::error::*;
 use crate::models::course::*;
-use chrono::NaiveDateTime;
 use sqlx::postgres::PgPool;
 
 pub async fn get_coures_for_teacher_db(

@@ -6,13 +6,19 @@ default-run = "teachers-service"
 resolver = "2"
 
 [dependencies]
+actix-cors = "0.6.0-beta.10"
 actix-web = "4.0.0-rc.2"
 actix-rt = "2.6.0"
-serde = {version = "1.0.132",features = ["derive"]}
-chrono = {version = "0.4.19", features = ["serde"]}
+serde = { version = "1.0.132", features = ["derive"] }
+chrono = { version = "0.4.19", features = ["serde"] }
 dotenv = "0.15.0"
-openssl = {version="0.10.38",features = ["vendored"]}
-sqlx = {version = "0.5.10",default_features = false,features = ["postgres","runtime-tokio-rustls","macros","chrono",]}
+openssl = { version = "0.10.38", features = ["vendored"] }
+sqlx = { version = "0.5.10", default_features = false, features = [
+    "postgres",
+    "runtime-tokio-rustls",
+    "macros",
+    "chrono",
+] }
 syn = { version = "1.0", features = ["derive", "parsing", "full"] }
 
 [[bin]]
